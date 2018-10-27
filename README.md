@@ -13,6 +13,7 @@ https://www.eventbrite.de/e/neo-camp-neo-blockchain-hackathon-tickets-4993236906
 * [TestNet Neo scanner](https://neoscan-testnet.io)
 * [Neo-boa compiler is a tool for compiling Python files to the .avm](https://github.com/CityOfZion/neo-boa)
 * [NEO Smart Contracts (Python) Tutorial by Dean van Dugteren at NEO Amsterdam](https://www.youtube.com/watch?v=yLPEsst_SVw)
+* [Neo-one ONE tool for development](https://neo-one.io/)
 
 # Get ready
     conda update --prefix /home/$USER/anaconda3 anaconda
@@ -76,6 +77,21 @@ https://www.eventbrite.de/e/neo-camp-neo-blockchain-hackathon-tickets-4993236906
     # Contract details
     contract 0x20e01f4299ba22b1d151a7ec6c15eb2034e26ae2 
 
+    neo> testinvoke 0x20e01f4299ba22b1d151a7ec6c15eb2034e26ae2 RegisterProduct ['AHN16o8aLv1y1fiY5xBqXBmshBneWZrHth','MyFirstProduct']                                                                            
+    Used 1.393 Gas 
+
+    -------------------------------------------------------------------------------------------------------------------------------------
+    Test invoke successful
+    Total operations: 145
+    Results [{'type': 'Integer', 'value': '1'}]
+    Invoke TX GAS cost: 0.0
+    Invoke TX fee: 0.0001
+
+    Enter your password to continue and invoke on the network
+
+    [password]> ***********
+    [I 181025 20:05:15 Transaction:617] Verifying transaction: b'7f532877f70d25ba249e6ba391a7a2effee865023715cd141c36b12dc5364f77' 
+Relayed Tx: 7f532877f70d25ba249e6ba391a7a2effee865023715cd141c36b12dc5364f77 
 
 
 # Neo operations
