@@ -1,0 +1,29 @@
+ 181027 13:45:39 UserWallet:154] contract does not exist yet
+[I 181027 13:45:39 UserWallet:484] Script hash b'\x1a&\x05/R\xcd\xff\x111\xb7\xbaX2\x14R\xc4U\xd0?V' <class 'bytes'>
+Wallet {
+    "path": "privnet1",
+    "addresses": [
+        {
+            "address": "AJA8mBMsCdGFuHw4QudyifxPGcKADrgsmZ",
+            "script_hash": "1a26052f52cdff1131b7ba58321452c455d03f56",
+            "tokens": null
+        }
+    ],
+    "height": 0,
+    "percent_synced": 0,
+    "synced_balances": [],
+    "public_keys": [
+        {
+            "Address": "AJA8mBMsCdGFuHw4QudyifxPGcKADrgsmZ",
+            "Public Key": "0382de3e2c5035a110b4e093829726c010c3f2a617bdb50b45411784272489c37b"
+        }
+    ],
+    "tokens": [],
+    "claims": {
+        "available": "0.0",
+        "unavailable": "0.0"
+    }
+}
+Pubkey b'0382de3e2c5035a110b4e093829726c010c3f2a617bdb50b45411784272489c37b'
+neo>  
+
