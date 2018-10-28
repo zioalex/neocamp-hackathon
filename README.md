@@ -97,3 +97,6 @@ Relayed Tx: 7f532877f70d25ba249e6ba391a7a2effee865023715cd141c36b12dc5364f77
 # Neo operations
     np-prompt
       state
+
+
+20333-20336:20333-20336/tcp -p 30333-30336:30333-30336/tcp
