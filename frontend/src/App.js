@@ -6,7 +6,7 @@ import Navigation from './Navigation'
 import Home from './Home'
 import Register from './usage/Register'
 import Repair from './usage/Repair'
-import Verify from './usage/Verify'
+import Verify from './usage/Verifymock'   //using mockup for presentation
 import NotFound from './NotFound'
 // import Auth from './Auth'
 
