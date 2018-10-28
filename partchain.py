@@ -7,10 +7,17 @@ neo> build 4-domain.py test 0710 05 True False register ["test.com","AK2nJJpJr6o
 neo> build 4-domain.py test 0710 05 True False delete ["test.com"]
 neo> build 4-domain.py test 0710 05 True False transfer ["test.com","AK2nJJpJr6o664CWJKi1QRXjqeic"]
 
+build 4-domain.py test 0710 05 True False False register ["test.com","AK2nJJpJr6o664CWJKi1QRXjqeic2zRp8y"]
+build partchain.py test 0710 05 True False False registerpart ["1234567890","Radar","Wavelength: 10.71 cm , Peak transmit power: 500 kW (250 kW horizontal, 250 kW vertical) , Pulse duration: 0.72 microseconds , Minimum detectable signal: -108 dBm", "2018-10-27", "10 years", "New", "AK2nJJpJr6o664CWJKi1QRXjqeic2zRp8y"]
+
+RegisterPart(serial_number, part_name, tech_spec, manufacture_date, lifespan, current_status, owner)
+
 Importing:
 
-neo> import contract 4-domain.avm 0710 05 True False
+neo> import contract 4-domain.avm 0710 05 True False False
 neo> contract search ...
+
+import contract partchain.avm  0710 05 True False False
 
 Using:
 
@@ -31,19 +38,14 @@ from boa.builtins import concat
 manufacture_data_json = {   "Serial_number": "", 
                             "Part_name": "",
                             "TechSpec": "",
+                            "Certified_by": "",
                             "Manufacture_date": "",
                             "Lifespan": "", # Hours of flight, Km, 
-                            "Current_status": "NEW" # NEW at the beginning and later on same value as "Repair_history": {"Date":....Status}
-                            "Repair_history": {
-                                "Date": {
-                                    "Repair_company": "", "Status":, "Ok/Failure", "ID_technician": "", "Current_usage": "Km, hours"} 
-                                    , "Date", ""},
-                            "Ownerhip_history": [ { "Date": 
-                                                   { Owner: "Boing", Aircraft_ID: "2312321386213" }, 
-                                                ]
+                            "Current_status": "New / Certified / Uncertified / Implemented / Refurbished / Out of order", 
+                            "Repair_history": { "Repair_company": "", "Status": "Ok/Failure", "ID_technician": "", "Current_usage": "Km, hours" },
+                            "Ownerhip_history": { Owner: "Boing", Aircraft_ID: "2312321386213" }
                         }
 
-repair_data_json = 
 
 def Main(operation, args):
     nargs = len(args)
@@ -59,22 +61,68 @@ def Main(operation, args):
         domain_name = args[0]
         return DeleteDomain(domain_name)
 
-    elif operation == 'register':
-        if nargs < 2:
-            print("required arguments: [domain_name] [owner]")
+    elif operation == 'registerpart':
+        if nargs < 7:
+            print("required arguments: Serial_number Part_name TechSpec Manufacture_date Lifespan Current_status Owner")
             return 0
-        domain_name = args[0]
-        owner = args[1]
-        return RegisterDomain(domain_name, owner)
+        serial_number = args[0]
+        part_name = args[1]
+        tech_spec = args[2]
+        manufacture_date = args[3]
+        lifespan = args[4]
+        current_status = args[5]
+        owner = args[6]
+
+        return registerpart(serial_number, part_name, tech_spec, manufacture_date, lifespan, current_status, owner)
+    
+    elif operation == 'certification':
+        if nargs < 7:
+            print("required arguments: Serial_number Part_name TechSpec Manufacture_date Lifespan Current_status Owner")
+            return 0
+        serial_number = args[0]
+        part_name = args[1]
+        tech_spec = args[2]
+        manufacture_date = args[3]
+        lifespan = args[4]
+        current_status = args[5]
+        owner = args[6]
+
+        return registerpart(serial_number, part_name, tech_spec, manufacture_date, lifespan, current_status)
 
     elif operation == 'transfer':
-        if nargs < 2:
-            print("required arguments: [domain_name] [to_address]")
+        if nargs < 3:
+            print("required arguments: [serial_number] [part_name] [to_address]")
             return 0
-        domain_name = args[0]
+        serial_number = args[0]
+        part_name = args[0]
         to_address = args[1]
         return TransferDomain(domain_name, to_address)
 
+
+def registerpart(serial_number, part_name, tech_spec, manufacture_date, lifespan, current_status):
+    """ The manufacture will register the new component
+    """
+    msg = concat("Part_name: ", part_name)
+    msg = concat("Tech_spec: ", tech_spec)
+    msg = concat("Manufacture_date: ", manufacture_date)
+    msg = concat("Lifespan: ", lifespan)
+    msg = concat("Current_status: ", current_status)
+
+    Notify(msg)
+    # Put data in a Key/Value datastore
+
+#    if not CheckWitness(owner):
+#        Notify("Owner argument is not the same as the sender")
+#        return False
+
+    context = GetContext()
+#    exists = Get(context, domain_name)
+#    if exists:
+#        Notify("Domain is already registered")
+#        return False
+
+    Put(context, serial_number, msg)
+    return True
 
 def QueryDomain(domain_name):
     msg = concat("QueryDomain: ", domain_name)
@@ -90,22 +138,6 @@ def QueryDomain(domain_name):
     return owner
 
 
-def RegisterDomain(domain_name, owner):
-    msg = concat("RegisterDomain: ", domain_name)
-    Notify(msg)
-
-    if not CheckWitness(owner):
-        Notify("Owner argument is not the same as the sender")
-        return False
-
-    context = GetContext()
-    exists = Get(context, domain_name)
-    if exists:
-        Notify("Domain is already registered")
-        return False
-
-    Put(context, domain_name, owner)
-    return True
 
 
 def TransferDomain(domain_name, to_address):
