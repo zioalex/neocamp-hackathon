@@ -14,6 +14,13 @@ https://www.eventbrite.de/e/neo-camp-neo-blockchain-hackathon-tickets-4993236906
 * [Neo-boa compiler is a tool for compiling Python files to the .avm](https://github.com/CityOfZion/neo-boa)
 * [NEO Smart Contracts (Python) Tutorial by Dean van Dugteren at NEO Amsterdam](https://www.youtube.com/watch?v=yLPEsst_SVw)
 * [Neo-one ONE tool for development](https://neo-one.io/)
+* [Neo Python SDK](https://neo-python.readthedocs.io/en/latest/)
+* https://github.com/CityOfZion/neo-local
+* [Neo Smart-Contract Introduction](http://docs.neo.org/en-us/sc/introduction.html)
+* [Blockchain explorer for NEO](https://github.com/CityOfZion/neo-scan)
+* [Workshop for programming smart contracts with Python](https://github.com/CityOfZion/python-smart-contract-workshop)
+* [NeoCompiler Eco Tools](https://neocompiler.io/#/ecolab)
+* [Not Fungible Token template](https://github.com/Splyse/neo-nft-template/blob/master/nft.mediawiki)
 
 # Get ready
     conda update --prefix /home/$USER/anaconda3 anaconda
